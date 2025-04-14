@@ -10,9 +10,3 @@ class Product:
         self.description = description
         self.price = price
         self.quantity = quantity
-
-
-if __name__ == '__main__':
-    prod1 = Product('Арбуз', 'Сочный и красный', 100.00, 2)
-
-    print(prod1.name, prod1.price, prod1.quantity, prod1.description)

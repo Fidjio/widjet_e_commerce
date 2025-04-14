@@ -1,7 +1,3 @@
-from src.category import Category
-from src.product import Product
-
-
 def test_category_init(category_init_1, category_init_2):
     assert category_init_1.name == 'Продовольствие'
     assert category_init_1.description == 'Товары для питания'
