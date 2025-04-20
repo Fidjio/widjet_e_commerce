@@ -13,8 +13,13 @@ def test_product_init(product_init):
 
 def test_new_product():
     prod = Product.new_product(
-        {"name": "Samsung Galaxy S23 Ultra", "description": "256GB, Серый цвет, 200MP камера", "price": 180000.0,
-         "quantity": 5})
+        {
+            "name": "Samsung Galaxy S23 Ultra",
+            "description": "256GB, Серый цвет, 200MP камера",
+            "price": 180000.0,
+            "quantity": 5,
+        }
+    )
 
     assert prod
     assert prod.name == "Samsung Galaxy S23 Ultra"
