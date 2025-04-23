@@ -35,3 +35,13 @@ def test_price(product_init):
     product_init.price = 0
     product_init.price = -20.00
     assert product_init.price == 100.00
+
+
+def test_magic_str_product():
+    product1 = Product('Iphone 15', '512GB, Gray space', 210000.0, 8)
+    product2 = Product('Xiaomi Redmi Note 11', '1024GB, Синий', 31000.0, 14)
+    product3 = Product('Xiaomi Redmi Note 11', '1024GB, Синий', 31000.0, '14')
+
+    assert str(product1) == f'Iphone 15, 210000.0 руб. Остаток: 8 шт.'
+    assert product1 + product2 == 2114000.0
+    assert product1 + product3 == 'Price или quantity не является числом!'
