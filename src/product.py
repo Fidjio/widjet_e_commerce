@@ -17,6 +17,10 @@ class Product:
     def __str__(self):
         return f'{self.name}, {self.__price} руб. Остаток: {self.quantity} шт.'
 
+    def __add__(self, other):
+        full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
+        return full_sum_prod
+
     @classmethod
     def new_product(cls, setting_dict: Dict[str, Any]) -> "Product":
         """Создает новый продукт из словаря"""
