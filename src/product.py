@@ -18,8 +18,12 @@ class Product:
         return f'{self.name}, {self.__price} руб. Остаток: {self.quantity} шт.'
 
     def __add__(self, other):
-        full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
-        return full_sum_prod
+        try:
+            full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
+            return full_sum_prod
+        except TypeError:
+            return f"Price или quantity не является числом!"
+
 
     @classmethod
     def new_product(cls, setting_dict: Dict[str, Any]) -> "Product":
