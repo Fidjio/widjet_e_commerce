@@ -14,6 +14,9 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        return f'{self.name}, {self.__price} руб. Остаток: {self.quantity} шт.'
+
     @classmethod
     def new_product(cls, setting_dict: Dict[str, Any]) -> "Product":
         """Создает новый продукт из словаря"""
