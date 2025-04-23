@@ -33,4 +33,4 @@ def test_products_list(category_init_1):
 
 
 def test_magic_str_category(category_init_1):
-    assert str(category_init_1) == 'Продовольствие, количество продуктов: 5 шт.'
+    assert str(category_init_1) == "Продовольствие, количество продуктов: 5 шт."

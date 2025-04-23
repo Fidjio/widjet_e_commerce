@@ -14,16 +14,15 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
-    def __str__(self):
-        return f'{self.name}, {self.__price} руб. Остаток: {self.quantity} шт.'
+    def __str__(self) -> str:
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other):
+    def __add__(self, other: "Product") -> str | float | Any:
         try:
             full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
             return full_sum_prod
         except TypeError:
-            return f"Price или quantity не является числом!"
-
+            return 'Price или quantity не является числом!'
 
     @classmethod
     def new_product(cls, setting_dict: Dict[str, Any]) -> "Product":
