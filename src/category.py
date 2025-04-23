@@ -18,9 +18,12 @@ class Category:
 
     def __str__(self):
         all_quantity = 0
-        all_quantity += sum([product.quantity for product in self.__products])
+        try:
+            all_quantity += sum([product.quantity for product in self.__products])
+        except TypeError:
+            return 'Ошибка. quantity не является числом'
 
-        return f'Название категории, количество продуктов: {all_quantity} шт.'
+        return f'{self.name}, количество продуктов: {all_quantity} шт.'
 
     def add_product(self, new_product: Product) -> None:
         self.__products.append(new_product)
