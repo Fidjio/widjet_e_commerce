@@ -1,7 +1,9 @@
 import sys
 from io import StringIO
 
-from src.product import Product
+import pytest
+
+from src.product import Product, LawnGrass
 
 
 def test_product_init(product_init):
@@ -45,3 +47,13 @@ def test_magic_str_product():
     assert str(product1) == f"Iphone 15, 210000.0 руб. Остаток: 8 шт."
     assert product1 + product2 == 2114000.0
     assert product1 + product3 == "Price или quantity не является числом!"
+
+
+def test_add_product():
+    product1 = Product("Iphone 15", "512GB, Gray space", 100.0, 2)
+    product2 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 200.0, 1)
+    lawn_grass = LawnGrass("test", "тестовый класс", 150.0, 1, "Russia", "10 дней", "White")
+
+    assert product1 + product2 == 400.0
+    with pytest.raises(ValueError, match="Сложение разных видов товара невозможно!"):
+        lawn_grass + product1
