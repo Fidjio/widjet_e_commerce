@@ -1,3 +1,5 @@
+import pytest
+
 from src.product import Product
 
 
@@ -34,3 +36,10 @@ def test_products_list(category_init_1):
 
 def test_magic_str_category(category_init_1):
     assert str(category_init_1) == "Продовольствие, количество продуктов: 5 шт."
+
+
+def test_add_not_product(category_init_1):
+    prod1 = Product("Дыня", "Желтая ягода", 20, 3)
+    with pytest.raises(TypeError, match="Невозможно добавить"):
+        category_init_1.add_product("Не продукт")
+
