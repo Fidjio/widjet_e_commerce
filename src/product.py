@@ -18,14 +18,11 @@ class Product:
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other: "Product") -> str | float | Any:
-        if issubclass(type(other), self.__class__):
-            try:
-                full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
-                return full_sum_prod
-            except TypeError:
-                return 'Price или quantity не является числом!'
+        if type(other) is self.__class__:
+            full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
+            return full_sum_prod
 
-        raise ValueError('Сложение разных видов товара невозможно!')
+        raise TypeError('Сложение разных видов товара невозможно!')
 
     @classmethod
     def new_product(cls, setting_dict: Dict[str, Any]) -> "Product":
