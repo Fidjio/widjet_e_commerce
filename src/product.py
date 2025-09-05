@@ -1,7 +1,50 @@
 from typing import Any, Dict
+from abc import ABC, abstractmethod
 
 
-class Product:
+class BaseProduct(ABC):
+
+    @abstractmethod
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self):
+        pass
+
+    @classmethod
+    @abstractmethod
+    def new_product(cls):
+        """Создает новый продукт из словаря"""
+        pass
+
+    @property
+    @abstractmethod
+    def price(self):
+        """Геттер для цены продукта"""
+        pass
+
+    @price.setter
+    @abstractmethod
+    def price(self):
+        """Сеттер для установки новой цены продукта с проверкой"""
+        pass
+
+
+class InitPrintMixin:
+
+    def __init__(self):
+        print(repr(self))
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.name}, {self.price}, {self.description}, {self.quantity})"
+
+
+class Product(InitPrintMixin, BaseProduct):
     """Класс для описания продукта"""
 
     name: str
@@ -13,6 +56,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self) -> str:
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."

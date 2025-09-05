@@ -77,3 +77,17 @@ def test_init_smartphone():
     assert  smartphone1.memory == 256
     assert  smartphone1.model == "S23 Ultra"
     assert  smartphone1.color == "Серый"
+
+def test_init_print_mixin(capsys):
+    prod1 = Product("Арбуз", "Ягода", 50.00, 3)
+    message = capsys.readouterr()
+    assert message.out.strip() == 'Product(Арбуз, 50.0, Ягода, 3)'
+
+    lawn_grass = LawnGrass("test", "тестовый класс", 150.0, 1, "Russia", "10 дней", "White")
+    message = capsys.readouterr()
+    assert message.out.strip() == 'LawnGrass(test, 150.0, тестовый класс, 1)'
+
+    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
+                             "S23 Ultra", 256, "Серый")
+    message = capsys.readouterr()
+    assert message.out.strip() == 'Smartphone(Samsung Galaxy S23 Ultra, 180000.0, 256GB, Серый цвет, 200MP камера, 5)'
