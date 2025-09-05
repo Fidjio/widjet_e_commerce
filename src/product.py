@@ -1,7 +1,41 @@
 from typing import Any, Dict
+from abc import ABC, abstractmethod
 
 
-class Product:
+class BaseProduct(ABC):
+
+    @abstractmethod
+    def __init__(self, name: str, description: str, price: float, quantity: int):
+        pass
+
+    @abstractmethod
+    def __str__(self) -> str:
+        pass
+
+    @abstractmethod
+    def __add__(self, other: "Product") -> str | float | Any:
+        pass
+
+    @classmethod
+    @abstractmethod
+    def new_product(cls, setting_dict: Dict[str, Any]) -> "Product":
+        """Создает новый продукт из словаря"""
+        pass
+
+    @property
+    @abstractmethod
+    def price(self) -> float:
+        """Геттер для цены продукта"""
+        pass
+
+    @price.setter
+    @abstractmethod
+    def price(self, new_price: float) -> None:
+        """Сеттер для установки новой цены продукта с проверкой"""
+        pass
+
+
+class Product(BaseProduct):
     """Класс для описания продукта"""
 
     name: str
