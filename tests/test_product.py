@@ -1,7 +1,9 @@
 import sys
 from io import StringIO
 
-from src.product import Product
+import pytest
+
+from src.product import Product, LawnGrass, Smartphone
 
 
 def test_product_init(product_init):
@@ -45,3 +47,33 @@ def test_magic_str_product():
     assert str(product1) == f"Iphone 15, 210000.0 руб. Остаток: 8 шт."
     assert product1 + product2 == 2114000.0
     assert product1 + product3 == "Price или quantity не является числом!"
+
+
+def test_add_product():
+    product1 = Product("Iphone 15", "512GB, Gray space", 100.0, 2)
+    product2 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 200.0, 1)
+    lawn_grass = LawnGrass("test", "тестовый класс", 150.0, 1, "Russia", "10 дней", "White")
+    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
+                             "S23 Ultra", 256, "Серый")
+
+    assert product1 + product2 == 400.0
+    with pytest.raises(TypeError, match="Сложение разных видов товара невозможно!"):
+        lawn_grass + product1
+        lawn_grass + smartphone1
+
+
+def test_init_lawngrass():
+    grass1 = LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
+
+    assert grass1.color == "Зеленый"
+    assert grass1.country == "Россия"
+    assert grass1.germination_period == "7 дней"
+
+def test_init_smartphone():
+    smartphone1 = Smartphone("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5,
+                             "S23 Ultra", 256, "Серый")
+
+    assert  smartphone1.efficiency == 95.5
+    assert  smartphone1.memory == 256
+    assert  smartphone1.model == "S23 Ultra"
+    assert  smartphone1.color == "Серый"

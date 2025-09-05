@@ -19,10 +19,15 @@ class Product:
 
     def __add__(self, other: "Product") -> str | float | Any:
         try:
-            full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
-            return full_sum_prod
+            if type(other) is self.__class__:
+                full_sum_prod = (self.__price * self.quantity) + (other.__price * other.quantity)
+                return full_sum_prod
         except TypeError:
             return 'Price или quantity не является числом!'
+
+        raise TypeError('Сложение разных видов товара невозможно!')
+
+
 
     @classmethod
     def new_product(cls, setting_dict: Dict[str, Any]) -> "Product":
@@ -41,3 +46,23 @@ class Product:
             print("Цена не должна быть нулевая или отрицательная")
         else:
             self.__price = new_price
+
+
+class Smartphone(Product):
+
+    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: float, model: str, memory: str, color: str):
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+
+class LawnGrass(Product):
+
+    def __init__(self, name: str, description: str, price: float, quantity: int, country: str, germination_period: str, color: str):
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
+
